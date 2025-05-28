@@ -14,6 +14,8 @@ function App() {
 
   return (
     <div className="app">
+    <header className="app-header">ChatGPT Clone</header>
+    
       <div className="chat-box">
         {messages.map((msg, idx) => (
           <div key={idx} className={`message ${msg.role}`}>
