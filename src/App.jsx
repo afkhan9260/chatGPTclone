@@ -28,6 +28,11 @@ function App() {
       });
 
       const data = await response.json();
+
+       if (!response.ok) {
+      throw new Error(data.error?.message || 'API request failed');
+    }
+
       const botReply = data.choices[0].message;
 
       setMessages((prev) => [...prev, botReply]);
@@ -35,7 +40,7 @@ function App() {
       console.error('Error:', error);
       setMessages((prev) => [
         ...prev,
-        { role: 'bot', content: 'Oops! Something went wrong.' },
+        { role: 'bot', content: `Oops! Something went wrong: ${error.message}` },
       ]);
     } finally {
       setLoading(false);
